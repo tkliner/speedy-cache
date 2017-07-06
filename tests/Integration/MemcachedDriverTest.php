@@ -85,7 +85,7 @@ class MemcachedDriverTest extends TestCase
         $memcached->write('test', 'test', [Cache::EXPIRATION => 2]);
 
         $this->assertSame('test', $memcached->read('test'), 'Returned item from cache isn\'t same as excepted.');
-        sleep(2);
+        sleep(3);
         $this->assertNull($memcached->read('test'), 'Method read return test item when should return null.');
     }
 
@@ -98,11 +98,11 @@ class MemcachedDriverTest extends TestCase
         $memcached->write('test', 'test', [Cache::EXPIRATION => 3, Cache::SHIFT => true]);
 
         $this->assertSame('test', $memcached->read('test'), 'Returned item from cache isn\'t same as excepted.');
-        sleep(2);
+        sleep(1);
         $this->assertSame('test', $memcached->read('test'), 'Returned item from cache isn\'t same as excepted.');
         sleep(2);
         $this->assertSame('test', $memcached->read('test'), 'Returned item from cache isn\'t same as excepted.');
-        sleep(4);
+        sleep(5);
         $this->assertNull($memcached->read('test'), 'Method read return test item when should return null.');
     }
 
@@ -116,7 +116,7 @@ class MemcachedDriverTest extends TestCase
         $cache->add('test', 'test', [Cache::FILE => __DIR__ . '/' . self::FILE]);
 
         $this->assertSame('test', $cache->get('test'), 'Returned item from cache isn\'t same as excepted.');
-        sleep(2);
+        sleep(4);
         unlink(__DIR__ . '/' . self::FILE);
         file_put_contents(__DIR__ . '/' . self::FILE, '- new_test', FILE_APPEND);
         $this->assertNull($cache->get('test'), 'Method read return test item when should return null.');
