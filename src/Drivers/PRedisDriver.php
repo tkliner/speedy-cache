@@ -44,14 +44,14 @@ class PRedisDriver implements DriverInterface
      * PRedisDriver constructor.
      *
      * @param string $scheme
-     * @param string $host
+     * @param mixed $host
      * @param int    $port
      * @param null   $prefix
      *
      * @throws \LogicException
      * @throws \RuntimeException
      */
-    public function __construct(string $scheme = 'tcp', string $host = '127.0.0.1', int $port = 6379, $prefix = null)
+    public function __construct($host = '127.0.0.1', string $scheme = 'tcp', int $port = 6379, $prefix = null)
     {
         if (!self::isAvailable()) {
             throw new \LogicException('Class \Predis\Client not loaded, please install PRedisDriver package!');
